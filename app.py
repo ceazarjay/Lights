@@ -40,45 +40,57 @@ st.markdown("""
     /* App background */
     .stApp { background-color: #FAFAFA; }
 
-    /* Sidebar */
-    [data-testid="stSidebar"] {
-        background-color: #2C1A0E;
-    }
-    [data-testid="stSidebar"] * {
-        color: #F5EFE6 !important;
-    }
-    [data-testid="stSidebar"] .stMarkdown p,
-    [data-testid="stSidebar"] label,
-    [data-testid="stSidebar"] span {
-        color: #F5EFE6 !important;
-    }
-    [data-testid="stSidebar"] hr {
-        border-color: #C9AB82 !important;
+    /* Force ALL main-area text to black */
+    .stApp p, .stApp span, .stApp div, .stApp label,
+    .stApp li, .stApp td, .stApp th,
+    .stMarkdown p, .stMarkdown li, .stMarkdown span,
+    .stText, .stCaption p, .stAlert p,
+    [data-testid="stText"], [data-testid="stCaption"] p {
+        color: #111111 !important;
     }
 
     /* Headings */
     h1 { color: #2E7D8C !important; }
-    h2, h3 { color: #2C1A0E !important; }
+    h2, h3, h4 { color: #111111 !important; }
 
-    /* Metric labels and values */
-    [data-testid="stMetricLabel"] p  { color: #2C1A0E !important; font-weight: 600; }
+    /* Subheader text */
+    [data-testid="stHeadingWithActionElements"] h2,
+    [data-testid="stHeadingWithActionElements"] h3 {
+        color: #111111 !important;
+    }
+
+    /* Metric */
+    [data-testid="stMetricLabel"] p  { color: #111111 !important; font-weight: 600; }
     [data-testid="stMetricValue"]    { color: #C1440E !important; }
     [data-testid="stMetricDelta"]    { color: #2E7D8C !important; }
 
-    /* Slider labels */
-    .stSlider label { color: #2C1A0E !important; }
+    /* Slider */
+    .stSlider label, .stSlider span, .stSlider p { color: #111111 !important; }
+    [data-testid="stSlider"] span { color: #111111 !important; }
 
-    /* Multiselect labels */
-    .stMultiSelect label { color: #2C1A0E !important; }
+    /* Multiselect */
+    .stMultiSelect label, .stMultiSelect span { color: #111111 !important; }
+    [data-testid="stMultiSelect"] span { color: #111111 !important; }
 
-    /* Subheader rule line */
-    hr { border-top: 1px solid #C9AB82; }
-
-    /* Caption / small text */
-    .stCaption p { color: #6B5B4E !important; }
+    /* Select / multiselect tags */
+    .stMultiSelect [data-baseweb="tag"] span { color: #111111 !important; }
 
     /* Info box */
-    .stAlert p { color: #2C1A0E !important; }
+    .stAlert, .stAlert p, .stAlert span { color: #111111 !important; }
+
+    /* Divider */
+    hr { border-top: 1px solid #C9AB82; }
+
+    /* Sidebar — cream text on espresso background */
+    [data-testid="stSidebar"] { background-color: #2C1A0E; }
+    [data-testid="stSidebar"] *,
+    [data-testid="stSidebar"] p,
+    [data-testid="stSidebar"] span,
+    [data-testid="stSidebar"] label,
+    [data-testid="stSidebar"] div {
+        color: #F5EFE6 !important;
+    }
+    [data-testid="stSidebar"] hr { border-color: #C9AB82 !important; }
 </style>
 """, unsafe_allow_html=True)
 
@@ -171,13 +183,16 @@ def load_data():
 df = load_data()
 
 # -- Shared layout defaults for all charts
+BLACK = "#111111"
 LAYOUT = dict(
     paper_bgcolor=BG,
     plot_bgcolor=BG,
-    font=dict(family="Helvetica, Arial, sans-serif", color=ESPRESSO, size=12),
+    font=dict(family="Helvetica, Arial, sans-serif", color=BLACK, size=12),
     margin=dict(l=10, r=20, t=50, b=40),
 )
-AXIS = dict(showgrid=True, gridcolor=GRID, linecolor=GRID, tickcolor=ESPRESSO)
+AXIS = dict(showgrid=True, gridcolor=GRID, linecolor=GRID,
+            tickcolor=BLACK, tickfont=dict(color=BLACK),
+            title_font=dict(color=BLACK))
 
 # -- Sidebar
 with st.sidebar:
@@ -267,8 +282,8 @@ fig_map.update_layout(
     margin=dict(l=0, r=0, t=40, b=0),
     coloraxis_colorbar=dict(
         title="Access %", ticksuffix="%",
-        tickfont=dict(color=ESPRESSO),
-        titlefont=dict(color=ESPRESSO),
+        tickfont=dict(color=BLACK),
+        titlefont=dict(color=BLACK),
     ),
     geo=dict(showframe=False, showcoastlines=True,
              coastlinecolor="#CCCCCC", bgcolor=BG),
@@ -316,11 +331,11 @@ fig_dark.update_layout(
     height=max(380, len(dark_df) * 22),
     coloraxis_colorbar=dict(
         title="Gain (pp)",
-        tickfont=dict(color=ESPRESSO),
-        titlefont=dict(color=ESPRESSO),
+        tickfont=dict(color=BLACK),
+        titlefont=dict(color=BLACK),
     ),
     xaxis=dict(**AXIS, range=[0, 55], ticksuffix="%"),
-    yaxis=dict(tickfont=dict(color=ESPRESSO, size=11)),
+    yaxis=dict(tickfont=dict(color=BLACK)),
 )
 fig_dark.update_traces(marker_line_width=0)
 st.plotly_chart(fig_dark, use_container_width=True)
@@ -359,9 +374,9 @@ fig_race.update_layout(
     yaxis=dict(categoryorder="total ascending",
                tickfont=dict(size=11, color=ESPRESSO)),
     xaxis=dict(**AXIS, title="Percentage-Point Gain", ticksuffix="pp",
-               tickfont=dict(color=ESPRESSO)),
+               tickfont=dict(color=BLACK)),
     legend=dict(orientation="h", yanchor="bottom", y=1.02,
-                xanchor="left", x=0, font=dict(color=ESPRESSO)),
+                xanchor="left", x=0, font=dict(color=BLACK)),
 )
 st.plotly_chart(fig_race, use_container_width=True)
 st.markdown("---")
@@ -398,9 +413,9 @@ fig_scatter = px.scatter(
 fig_scatter.update_layout(
     **LAYOUT,
     height=480,
-    xaxis=dict(**AXIS, tickfont=dict(color=ESPRESSO)),
-    yaxis=dict(**AXIS, ticksuffix="%", tickfont=dict(color=ESPRESSO)),
-    legend=dict(orientation="v", x=1.01, font=dict(color=ESPRESSO)),
+    xaxis=dict(**AXIS, tickfont=dict(color=BLACK)),
+    yaxis=dict(**AXIS, ticksuffix="%", tickfont=dict(color=BLACK)),
+    legend=dict(orientation="v", x=1.01, font=dict(color=BLACK)),
 )
 fig_scatter.update_traces(marker=dict(opacity=0.80, line=dict(width=0.5, color="white")))
 st.plotly_chart(fig_scatter, use_container_width=True)
@@ -436,9 +451,9 @@ fig_cc = px.scatter(
 fig_cc.update_layout(
     **LAYOUT,
     height=460,
-    xaxis=dict(**AXIS, ticksuffix="%", tickfont=dict(color=ESPRESSO)),
-    yaxis=dict(**AXIS, ticksuffix="%", tickfont=dict(color=ESPRESSO)),
-    legend=dict(orientation="v", x=1.01, font=dict(color=ESPRESSO)),
+    xaxis=dict(**AXIS, ticksuffix="%", tickfont=dict(color=BLACK)),
+    yaxis=dict(**AXIS, ticksuffix="%", tickfont=dict(color=BLACK)),
+    legend=dict(orientation="v", x=1.01, font=dict(color=BLACK)),
 )
 fig_cc.update_traces(
     selector=dict(mode="markers"),
@@ -476,10 +491,10 @@ fig_trend = px.line(
 fig_trend.update_layout(
     **LAYOUT,
     height=420,
-    xaxis=dict(**AXIS, dtick=2, tickfont=dict(color=ESPRESSO)),
+    xaxis=dict(**AXIS, dtick=2, tickfont=dict(color=BLACK)),
     yaxis=dict(**AXIS, ticksuffix="%", range=[0, 102],
-               tickfont=dict(color=ESPRESSO)),
-    legend=dict(orientation="v", x=1.01, font=dict(color=ESPRESSO)),
+               tickfont=dict(color=BLACK)),
+    legend=dict(orientation="v", x=1.01, font=dict(color=BLACK)),
 )
 fig_trend.update_traces(marker=dict(size=5), line=dict(width=2.5))
 st.plotly_chart(fig_trend, use_container_width=True)
@@ -517,10 +532,10 @@ if spotlight_countries:
     fig_spot.update_layout(
         **LAYOUT,
         height=420,
-        xaxis=dict(**AXIS, dtick=2, tickfont=dict(color=ESPRESSO)),
+        xaxis=dict(**AXIS, dtick=2, tickfont=dict(color=BLACK)),
         yaxis=dict(**AXIS, ticksuffix="%", range=[0, 102],
-                   tickfont=dict(color=ESPRESSO)),
-        legend=dict(orientation="v", x=1.01, font=dict(color=ESPRESSO)),
+                   tickfont=dict(color=BLACK)),
+        legend=dict(orientation="v", x=1.01, font=dict(color=BLACK)),
     )
     fig_spot.update_traces(marker=dict(size=5), line=dict(width=2.5))
     st.plotly_chart(fig_spot, use_container_width=True)
