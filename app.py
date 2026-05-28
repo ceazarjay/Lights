@@ -280,9 +280,9 @@ fig_map.update_layout(
     height=440,
     margin=dict(l=0, r=0, t=40, b=0),
     coloraxis_colorbar=dict(
-        title="Access %", ticksuffix="%",
+        title=dict(text="Access %", font=dict(color=BLACK)),
+        ticksuffix="%",
         tickfont=dict(color=BLACK),
-        titlefont=dict(color=BLACK),
     ),
     geo=dict(showframe=False, showcoastlines=True,
              coastlinecolor="#CCCCCC", bgcolor=BG),
@@ -329,9 +329,8 @@ fig_dark.update_layout(
     **LAYOUT,
     height=max(380, len(dark_df) * 22),
     coloraxis_colorbar=dict(
-        title="Gain (pp)",
+        title=dict(text="Gain (pp)", font=dict(color=BLACK)),
         tickfont=dict(color=BLACK),
-        titlefont=dict(color=BLACK),
     ),
     xaxis=dict(**AXIS, range=[0, 55], ticksuffix="%"),
     yaxis=dict(tickfont=dict(color=BLACK)),
