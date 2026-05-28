@@ -188,7 +188,6 @@ LAYOUT = dict(
     paper_bgcolor=BG,
     plot_bgcolor=BG,
     font=dict(family="Helvetica, Arial, sans-serif", color=BLACK, size=12),
-    margin=dict(l=10, r=20, t=50, b=40),
 )
 AXIS = dict(showgrid=True, gridcolor=GRID, linecolor=GRID,
             tickcolor=BLACK, tickfont=dict(color=BLACK),
