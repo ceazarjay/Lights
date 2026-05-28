@@ -410,8 +410,8 @@ fig_scatter = px.scatter(
 fig_scatter.update_layout(
     **LAYOUT,
     height=480,
-    xaxis=dict(**AXIS, tickfont=dict(color=BLACK)),
-    yaxis=dict(**AXIS, ticksuffix="%", tickfont=dict(color=BLACK)),
+    xaxis=dict(**AXIS,),
+    yaxis=dict(**AXIS, ticksuffix="%"),
     legend=dict(orientation="v", x=1.01, font=dict(color=BLACK)),
 )
 fig_scatter.update_traces(marker=dict(opacity=0.80, line=dict(width=0.5, color="white")))
@@ -448,8 +448,8 @@ fig_cc = px.scatter(
 fig_cc.update_layout(
     **LAYOUT,
     height=460,
-    xaxis=dict(**AXIS, ticksuffix="%", tickfont=dict(color=BLACK)),
-    yaxis=dict(**AXIS, ticksuffix="%", tickfont=dict(color=BLACK)),
+    xaxis=dict(**AXIS, ticksuffix="%"),
+    yaxis=dict(**AXIS, ticksuffix="%"),
     legend=dict(orientation="v", x=1.01, font=dict(color=BLACK)),
 )
 fig_cc.update_traces(
@@ -488,9 +488,8 @@ fig_trend = px.line(
 fig_trend.update_layout(
     **LAYOUT,
     height=420,
-    xaxis=dict(**AXIS, dtick=2, tickfont=dict(color=BLACK)),
-    yaxis=dict(**AXIS, ticksuffix="%", range=[0, 102],
-               tickfont=dict(color=BLACK)),
+    xaxis=dict(**AXIS, dtick=2),
+    yaxis=dict(**AXIS, ticksuffix="%", range=[0, 102]),
     legend=dict(orientation="v", x=1.01, font=dict(color=BLACK)),
 )
 fig_trend.update_traces(marker=dict(size=5), line=dict(width=2.5))
@@ -529,9 +528,8 @@ if spotlight_countries:
     fig_spot.update_layout(
         **LAYOUT,
         height=420,
-        xaxis=dict(**AXIS, dtick=2, tickfont=dict(color=BLACK)),
-        yaxis=dict(**AXIS, ticksuffix="%", range=[0, 102],
-                   tickfont=dict(color=BLACK)),
+        xaxis=dict(**AXIS, dtick=2),
+        yaxis=dict(**AXIS, ticksuffix="%", range=[0, 102]),
         legend=dict(orientation="v", x=1.01, font=dict(color=BLACK)),
     )
     fig_spot.update_traces(marker=dict(size=5), line=dict(width=2.5))
