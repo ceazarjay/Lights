@@ -370,9 +370,8 @@ fig_race.update_layout(
     title="Top 25 Countries by Electricity Access Gain (2000 to 2020)",
     height=600, barmode="stack",
     yaxis=dict(categoryorder="total ascending",
-               tickfont=dict(size=11, color=ESPRESSO)),
-    xaxis=dict(**AXIS, title="Percentage-Point Gain", ticksuffix="pp",
-               tickfont=dict(color=BLACK)),
+               tickfont=dict(size=11, color=BLACK)),
+    xaxis=dict(**AXIS, title="Percentage-Point Gain", ticksuffix="pp"),
     legend=dict(orientation="h", yanchor="bottom", y=1.02,
                 xanchor="left", x=0, font=dict(color=BLACK)),
 )
