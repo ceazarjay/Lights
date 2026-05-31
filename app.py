@@ -5,7 +5,7 @@ import plotly.graph_objects as go
 import numpy as np
 
 st.set_page_config(
-    page_title="Light = Life | Global Electricity Access",
+    page_title="The Global Electricity Gap",
     layout="wide",
     initial_sidebar_state="expanded",
 )
@@ -168,7 +168,7 @@ def legend_style(orientation="v", x=1.01):
 
 with st.sidebar:
     st.markdown(
-        "<h2 style='color:#C9AB82;margin-bottom:0'>Light = Life</h2>"
+        "<h2 style='color:#C9AB82;margin-bottom:0'>The Global Electricity Gap</h2>"
         "<p style='color:#F5EFE6;font-size:0.85rem;margin-top:2px'>"
         "Global Electricity Access &nbsp;|&nbsp; 2000 - 2020</p>",
         unsafe_allow_html=True,
@@ -192,7 +192,7 @@ dff = df[
 ].copy()
 
 st.markdown(
-    "<h1>Light = Life</h1>"
+    "<h1>The Global Electricity Gap</h1>"
     "<p style='font-size:1.05rem;color:#6B5B4E;margin-top:-8px'>"
     "The global electricity access gap - who is still in the dark, "
     "what drives progress, and what it means for human development.</p>",
